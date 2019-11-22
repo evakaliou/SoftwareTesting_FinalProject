@@ -20,7 +20,7 @@ def read_input():
 # no bound has two consecutive numbers, parameters, or parameter-number pair as a substring
 def check_input():
     # makes sure that input is ok
-    print("input ok")
+    print("Disclaimer: We are not checking the input yet so we don't take responsibility for crappy inputs ¯\_(ツ)_/¯")
 
 
 def quantify_bound(bound, params):
@@ -67,6 +67,7 @@ def quantify_bound(bound, params):
 
 
 parameters = read_input()
+check_input()
 result = dict()
 
 for p in parameters:
