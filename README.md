@@ -15,8 +15,8 @@ lower_bound, upper_bound
 The constraints for each non-null value are:
 name_of_parameter: a non-empty string. must not be a number. must not contain + - * / 
 type_of_parameter: int or float
-lower_bound: either ( or [, followed by a number or the name of a previous parameter
-upper_bound: a number or the name of a previous parameter, followed by either ) or ]
+lower_bound: either ( or [, followed by a numerical expression with numbers and/or previous parameters
+upper_bound: a numerical expression with numbers and/or previous parameters, followed by either ) or ]
 amount: an integer greater than 0
 
 
