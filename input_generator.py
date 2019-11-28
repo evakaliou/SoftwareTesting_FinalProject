@@ -20,7 +20,7 @@ def read_input():
 # no bound has two consecutive numbers, parameters, or parameter-number pair as a substring
 def check_input():
     # makes sure that input is ok
-    print("Disclaimer: We are not checking the input yet so we don't take responsibility for crappy inputs ¯\_(ツ)_/¯")
+    print("Disclaimer: We are not checking the input yet so we don't take responsibility for crappy inputs ")
 
 
 def quantify_bound(bound, params):
@@ -47,6 +47,8 @@ def quantify_bound(bound, params):
             right = b_result[i + 1]
             if b_result[i + 1] in params:
                 right = params[b_result[i + 1]]
+            left = float(left)
+            right = float(right)
             if op == "*":
                 b_result[i-1] = left*right
             elif op == "/":
@@ -63,35 +65,38 @@ def quantify_bound(bound, params):
                 i = -1
     if len(b_result) != 1:
         sys.exit('def quantify bound : Outcome is not a single number')
+    if b_result[0] in params:
+        b_result[0] = float(params[b_result[0]])
     return b_result[0]
 
+def generate_input(parameters):
 
-parameters = read_input()
-check_input()
-result = dict()
+    check_input()
+    result = dict()
 
-for p in parameters:
-    name_of_par = p[0]
-    type_of_par = p[1]
-    lower = quantify_bound(p[2], result)
-    upper = quantify_bound(p[3], result)
-    if type_of_par == "int":
-        lower = int(math.ceil(lower))
-        upper = int(math.floor(upper))
-    amount = p[4]
-    if lower > upper:
-        print('lower and upper bound incompatibility for parameter '+name_of_par+". Trying again.")
-    if amount in result:
-        amount = result[amount]
-    if amount == 1:
+    for p in parameters:
+        name_of_par = p[0]
+        type_of_par = p[1]
+        lower = quantify_bound(p[2], result)
+        upper = quantify_bound(p[3], result)
         if type_of_par == "int":
-            result[name_of_par] = random.randint(lower, upper)
+            lower = int(math.ceil(lower))
+            upper = int(math.floor(upper))
+        amount = p[4]
+        if lower > upper:
+            print('lower and upper bound incompatibility for parameter '+name_of_par+". Trying again.")
+        if amount in result:
+            amount = result[amount]
+        if amount == 1:
+            if type_of_par == "int":
+                result[name_of_par] = random.randint(lower, upper)
+            else:
+                result[name_of_par] = random.uniform(lower, upper)
         else:
-            result[name_of_par] = random.uniform(lower, upper)
-    else:
-        if type_of_par == "int":
-            result[name_of_par] = [random.randint(lower, upper) for i in range(amount)]
-        else:
-            result[name_of_par] = [random.uniform(lower, upper) for i in range(amount)]
+            if type_of_par == "int":
+                result[name_of_par] = [random.randint(lower, upper) for i in range(amount)]
+            else:
+                print(name_of_par)
+                result[name_of_par] = [random.uniform(lower, upper) for i in range(amount)]
 
-print(result)
+    return result

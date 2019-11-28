@@ -6,7 +6,7 @@ import random
 # computes probability that the link 
 # (with capacity C and total arrival to service rate ratio sum_r)
 # has less than A[i] capacity left
-def blocking_probabilities(sum_r,C,A):
+def blocking_probabilities(sum_r, C, A):
     result = []
     for i in range(len(A)):
         bp = 0
@@ -18,7 +18,7 @@ def blocking_probabilities(sum_r,C,A):
 # computes probability that link with capacity C 
 # and arrival to service rate ratio r
 # has n<=C of its capacity taken
-def steady_state(r,C,n):
+def steady_state(r, C, n):
     result = 0
     nominator = pow(r,n)/math.factorial(n)
     denominator = pow(r,C)/math.factorial(C)
