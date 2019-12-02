@@ -95,6 +95,7 @@ def generate_input(parameters):
         amount = p[4]
         if lower > upper:
             print('lower and upper bound incompatibility for parameter '+name_of_par+". Trying again.")
+            return generate_input(parameters)
         if amount in result:
             amount = result[amount]
         if amount == 1:
