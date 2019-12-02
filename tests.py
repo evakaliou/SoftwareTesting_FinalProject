@@ -1,7 +1,5 @@
 from input_generator import generate_input
 from blockProbs_v1 import blocking_probabilities
-from input_generator import get_general_input
-from input_generator import get_same_rate_input
 
 from input_generator import generate_input
 from rateLoss_v1 import rate_of_loss
@@ -137,6 +135,26 @@ class TestOneEdge(unittest.TestCase):
             message += ". Its original value was "+str(lossRate)
             self.assertTrue(bool(lossRate_new <= lossRate), str(message))
 
+    @staticmethod
+    def get_general_input():
+        p1 = ["capacity", "int", [1.0], [10.0], 1]
+        p2 = ["amount_of_routes", "int", [3.0], [8.0], 1]
+        p3 = ["arrival_rates", "float", [0.0], [10.0], "amount_of_routes"]
+        p4 = ["service_rates", "float", [1.0], [1.0], "amount_of_routes"]
+        p5 = ["subset_amount_of_routes", "int", [2.0], ["amount_of_routes", "-", 1], 1]
+        p6 = ["requirements_of_routes", "int", [1.0], ["capacity", "/", 2], "amount_of_routes"]
+        return generate_input([p1, p2, p3, p4, p5, p6])
+
+    @staticmethod
+    def get_same_rate_input():
+        p1 = ["capacity", "int", [1.0], [10.0], 1]
+        p2 = ["amount_of_routes", "int", [3.0], [8.0], 1]
+        p3 = ["arrival_rate", "float", [0.0], [10.0], 1]
+        p4 = ["arrival_rates", "float", ["arrival_rate"], ["arrival_rate"], "amount_of_routes"]
+        p5 = ["service_rates", "float", [1.0], [1.0], "amount_of_routes"]
+        p6 = ["subset_amount_of_routes", "int", [2.0], ["amount_of_routes", "-", 1], 1]
+        p7 = ["requirements_of_routes", "int", [1.0], ["capacity", "/", 2], "amount_of_routes"]
+        return generate_input([p1, p2, p3, p4, p5, p6, p7])
 
 if __name__ == '__main__':
     unittest.main()
