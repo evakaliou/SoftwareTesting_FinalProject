@@ -4,7 +4,7 @@ class S_x:
     def __init__(self, A, X):
         self.A = A  # len(A)*2 matrix with resource requirements of each route
         self.X = X  # vector of size 2, capacity of each of two links
-        
+
         self.current = [0]*len(A)  # "current" element; how many active routes of each type
         self.route = len(A)  # route to check if one more can be added next
         self.rem1 = X[0]  # link 1 capacity remaining in *current* state
