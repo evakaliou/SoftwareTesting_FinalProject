@@ -80,7 +80,9 @@ class TestOneEdge(unittest.TestCase):
             assert (not input['requirements_of_routes'][i] == 0) or bp[i] == 0, "requirement is " + str(
                 input['requirements_of_routes'][i]) + "blocking prob is " + str(bp[i])
 
-    def test_permutations_bp(self):
+    # TO ADD: def test_permutations_bp(self):
+
+    def test_redundant_bp_v2(self):
         p1 = ["capacity", "int", [1.0], [10.0], 1]
         p2 = ["amount_of_routes", "int", [3.0], [8.0], 1]
         p3 = ["arrival_rates", "float", [0.0], [10.0], "amount_of_routes"]
@@ -91,11 +93,25 @@ class TestOneEdge(unittest.TestCase):
         input = generate_input([p1, p2, p3, p4, p5, p6])
         bp1 = bp_v1(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
         bp2 = bp_v2(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
+        error_message = str(input) + "\n bp1: " + str(bp1) + "\n bp2: " + str(bp2)
+        self.assertTrue(bp1 == bp2, error_message)
+
+    def test_redundant_bp_v3(self):
+        p1 = ["capacity", "int", [1.0], [10.0], 1]
+        p2 = ["amount_of_routes", "int", [3.0], [8.0], 1]
+        p3 = ["arrival_rates", "float", [0.0], [10.0], "amount_of_routes"]
+        p4 = ["service_rates", "float", [1.0], [1.0], "amount_of_routes"]
+        p5 = ["subset_amount_of_routes", "int", [2.0], ["amount_of_routes", "-", 1], 1]
+        p6 = ["requirements_of_routes", "int", [1.0], ["capacity", "/", 2], "amount_of_routes"]
+
+        input = generate_input([p1, p2, p3, p4, p5, p6])
+        bp1 = bp_v1(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
         bp3 = bp_v3(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
-        #assert bp1 == bp2, str(input) + "bp1: " + str(bp1) + "bp2: " + str(bp2)
         assert bp1 == bp3, str(input) + "bp1: " + str(bp1) + "bp3: " + str(bp3)
 
-    def test_permutations_lossRate(self):
+    # TO ADD: def test_permutations_lossRate(self):
+
+    def test_redundant_lossRate_v2_v3(self):
         p1 = ["capacity", "int", [1.0], [10.0], 1]
         p2 = ["amount_of_routes", "int", [3.0], [8.0], 1]
         p3 = ["arrival_rates", "float", [0.0], [10.0], "amount_of_routes"]

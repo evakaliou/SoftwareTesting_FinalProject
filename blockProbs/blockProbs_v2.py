@@ -22,10 +22,10 @@ def G_c(sum_r,C):
 def blocking_probabilities(sum_r, C, A):
     result = []
     for i in range(len(A)):
-        print("Probability that route "+str(i)+" is blocked = ")
+        # print("Probability that route "+str(i)+" is blocked = ")
         bp = 0
         for n in range(C-A[i]+1, C+1):
-            print("probability that there are "+str(n)+" active routes")
+            # print("probability that there are "+str(n)+" active routes")
             bp += steady_state(sum_r, C, n)
         result.append(bp)
     return result
