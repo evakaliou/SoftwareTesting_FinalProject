@@ -98,7 +98,7 @@ class TestOneEdge(unittest.TestCase):
         assert bp1 == bp3, str(input) + "bp1: " + str(bp1) + "bp3: " + str(bp3)
 
     def test_permutations_bp(self):
-        input = self.get_general_input()
+        input = get_general_input()
 
         bp0 = blocking_probabilities(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
 
@@ -140,13 +140,13 @@ class TestOneEdge(unittest.TestCase):
         input = generate_input([p1, p2, p3, p4, p5, p6])
         bp1 = bp_v1(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
         bp3 = bp_v3(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
-        assert bp1 == bp2, str(input) + "bp1: " + str(bp1) + "bp2: " + str(bp2)
+        #assert bp1 == bp2, str(input) + "bp1: " + str(bp1) + "bp2: " + str(bp2)
         assert bp1 == bp3, str(input) + "bp1: " + str(bp1) + "bp3: " + str(bp3)
 
     def test_permutations_bp(self):
-        input = self.get_general_input()
+        input = get_general_input()
 
-        bp0 = blocking_probabilities(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
+        bp0 = bp_v1(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
 
         list_of_tuples = []
         for i in range(len(input['requirements_of_routes'])):
@@ -156,12 +156,23 @@ class TestOneEdge(unittest.TestCase):
 
         for i in range(len(list_perm)):
             r_r = [elem[0] for elem in list_perm[i]]
-            bp_temp = blocking_probabilities(sum(input['arrival_rates']), input['capacity'], r_r)
+            bp_temp = bp_v1(sum(input['arrival_rates']), input['capacity'], r_r)
             bp = [elem[1] for elem in list_perm[i]]
             self.assertEqual(bp, bp_temp, "BP: " + str(bp) + "new BP" + str(bp_temp))
 
     def test_variations_lossRate(self):
-        assert bp1 == bp3, str(input) + "bp1: " + str(bp1) + "bp3: " + str(bp3)
+        input = get_general_input()
+
+        bp1 = bp_v1(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
+        bp2 = bp_v2(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
+        bp3 = bp_v3(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
+
+        lossRate1 = rl_v1(bp1, input["arrival_rates"], input["service_rates"])
+        lossRate2 = rl_v2(bp1, input["arrival_rates"], input["service_rates"])
+        lossRate3 = rl_v3(bp3, input["arrival_rates"], input["service_rates"])
+
+        assert lossRate1 == lossRate3, str(input) + "lossRate1: " + str(lossRate1) + ", lossRate3: " + str(lossRate3)
+        assert lossRate1 == lossRate2, str(input) + "lossRate1: " + str(lossRate1) + ", lossRate2: " + str(lossRate2)
 
     # TO ADD: def test_permutations_lossRate(self):
 
@@ -188,10 +199,10 @@ class TestOneEdge(unittest.TestCase):
         assert lossRate1 == lossRate2, str(input) + "lossRate1: " + str(lossRate1) + ", lossRate2: " + str(lossRate2)
 
     def test_permutations_lossRate(self):
-        input = self.get_general_input()
+        input = get_general_input()
         print(str(input))
-        bp0 = blocking_probabilities(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
-        loss_rate0 = rate_of_loss(bp0, input['arrival_rates'], input['service_rates'])
+        bp0 = bp_v1(sum(input['arrival_rates']), input['capacity'], input['requirements_of_routes'])
+        loss_rate0 = rl_v1(bp0, input['arrival_rates'], input['service_rates'])
 
         list_of_tuples = []
         for i in range(len(bp0)):
@@ -202,11 +213,11 @@ class TestOneEdge(unittest.TestCase):
             bp = [elem[0] for elem in list_perm[i]]
             arr_rates = [elem[1] for elem in list_perm[i]]
             ser_rates = [elem[2] for elem in list_perm[i]]
-            loss_rate = rate_of_loss(bp, arr_rates, ser_rates)
+            loss_rate = rl_v1(bp, arr_rates, ser_rates)
             self.assertEqual(loss_rate0, loss_rate, "lossrate0: " + str(loss_rate0) + "\nlossrate: " + str(loss_rate))
 
     def test_rateLoss_monotonicity(self):
-        input = self.get_general_input()
+        input = get_general_input()
         subset_amount_of_routes = input["subset_amount_of_routes"]
         sum_r = sum(input["arrival_rates"])
         C = input["capacity"]
