@@ -25,7 +25,7 @@ assert bp1 == bp2, str(input) + "bp1: " + str(bp1) + "bp2: " + str(bp2)
 assert bp1 == bp3, str(input) + "bp1: " + str(bp1) + "bp3: " + str(bp3)
 
 lossRate1 = rl_v1(bp1, input["arrival_rates"], input["service_rates"])
-lossRate2 = rl_v2(bp1, input["arrival_rates"], input["service_rates"])
+lossRate2 = rl_v2(bp2, input["arrival_rates"], input["service_rates"])
 lossRate3 = rl_v3(bp3, input["arrival_rates"], input["service_rates"])
 
 assert lossRate1 == lossRate3, str(input) + "lossRate1: " + str(lossRate1) + ", lossRate3: " + str(lossRate3)

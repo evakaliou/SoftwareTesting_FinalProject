@@ -27,3 +27,10 @@ def steady_state(r, C, n):
         denominator += pow(r, i) / math.factorial(i)
     ss_result = nominator/denominator
     return ss_result
+
+def G_c(r, C):
+    denominator = pow(r, C) / math.factorial(C)
+    for i in range(C):
+        denominator += pow(r, i) / math.factorial(i)
+
+    return denominator

@@ -4,7 +4,7 @@ import random
 
 # >>>>>>> CHANGE STARTS HERE <<<<<<<
 def G_c(sum_r,C):
-    result = sum_r
+    result = 1
     nominator = 1
     denominator = 1
     for n in range(1, C+1):
