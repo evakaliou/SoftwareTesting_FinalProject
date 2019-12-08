@@ -2,16 +2,15 @@ import unittest
 
 from input_generator import generate_input
 
-from .blockProbs.blockProbs_v1 import blocking_probabilities as bp_v1
-from .blockProbs.blockProbs_v2 import blocking_probabilities as bp_v2
-from .blockProbs.blockProbs_v3 import blocking_probabilities as bp_v3
+from blockProbs.blockProbs_v1 import blocking_probabilities as bp_v1
+from blockProbs.blockProbs_v2 import blocking_probabilities as bp_v2
+from blockProbs.blockProbs_v3 import blocking_probabilities as bp_v3
 
-from .rateLoss.rateLoss_v1 import rate_of_loss as rl_v1
-from .rateLoss.rateLoss_v2 import rate_of_loss as rl_v2
-from .rateLoss.rateLoss_v3 import rate_of_loss as rl_v3
+from rateLoss.rateLoss_v1 import rate_of_loss as rl_v1
+from rateLoss.rateLoss_v2 import rate_of_loss as rl_v2
+from rateLoss.rateLoss_v3 import rate_of_loss as rl_v3
 
 
-@staticmethod
 def get_same_rate_input():
     p1 = ["capacity", "int", [1.0], [10.0], 1]
     p2 = ["amount_of_routes", "int", [3.0], [8.0], 1]
@@ -22,7 +21,7 @@ def get_same_rate_input():
     p7 = ["requirements_of_routes", "int", [1.0], ["capacity", "/", 2], "amount_of_routes"]
     return generate_input([p1, p2, p3, p4, p5, p6, p7])
 
-@staticmethod
+
 def get_general_input():
     p1 = ["capacity", "int", [1.0], [10.0], 1]
     p2 = ["amount_of_routes", "int", [3.0], [8.0], 1]
