@@ -1,5 +1,6 @@
-from blockProbs_v1 import blocking_probabilities
-from rateLoss_v1 import rate_of_loss
+from .blockProbs.blockProbs_v1 import blocking_probabilities
+from .rateLoss.rateLoss_v1 import rate_of_loss
+
 
 def supermod_check(C, A, arrRates, serRates, subsetAmountOfRoutes):
 
@@ -14,7 +15,8 @@ def supermod_check(C, A, arrRates, serRates, subsetAmountOfRoutes):
     subset_block_prob = blocking_probabilities(sum(subset_arrRates), C, subset_A)
     subset_lossRate = rate_of_loss(subset_block_prob, subset_arrRates, subset_serRates)
 
-    # for each route belonging to the subset, remove it and see "what happens" both at the original set and at the subset
+    # for each route belonging to the subset,
+    #  remove it and see "what happens" both at the original set and at the subset:
     #  is the rate of loss supermodular? (comparison made between original set and subset)
     for i in range(subsetAmountOfRoutes):
         # Compute the blocking probabilities and loss rate
