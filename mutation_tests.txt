@@ -1,0 +1,11 @@
+[*] Start mutation process:
+   - targets: [blockProbs_v1,, blockProbs_v2,, blockProbs_v3]
+   - tests: tests
+Disclaimer: We are not checking the input yet so we don't take responsibility for crappy inputs 
+Disclaimer: We are not checking the input yet so we don't take responsibility for crappy inputs 
+lower and upper bound incompatibility for parameter requirements_of_routes. Trying again.
+Disclaimer: We are not checking the input yet so we don't take responsibility for crappy inputs 
+Disclaimer: We are not checking the input yet so we don't take responsibility for crappy inputs 
+{'capacity': 4, 'amount_of_routes': 7, 'arrival_rates': [2.5353228455237256, 5.9291798779726355, 5.550776999995933, 5.617909509742657, 5.943321382255551, 3.979171694155145, 4.929062326439272], 'service_rates': [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0], 'subset_amount_of_routes': 3, 'requirements_of_routes': [1, 2, 2, 2, 2, 2, 1]}
+[*] Tests failed:
+   - fail in test_permutations_lossRate (tests.TestOneEdge) - lossrate: 33.38899543489022

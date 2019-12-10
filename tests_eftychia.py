@@ -73,3 +73,7 @@ class TestSx(unittest.TestCase):
             value = bool( sum([next[i]*A[i][1] for i in range(len(A))]) <= X[1])
             next = testSet.get_next()
             print(next)
+
+
+if __name__ == '__main__':
+    unittest.main()
